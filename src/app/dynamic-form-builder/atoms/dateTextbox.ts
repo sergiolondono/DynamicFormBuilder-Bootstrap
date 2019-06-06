@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
+import { FieldsFunctionalityService } from 'src/app/fields-functionality.service';
 
 // text,email,tel,textarea,password, 
 @Component({
@@ -9,7 +10,7 @@ import { FormGroup } from '@angular/forms';
         <input *ngIf="!field.multiline" [attr.type]="field.type" class="form-control"  
         [id]="field.name" [name]="field.name" [formControlName]="field.name" 
         maxlength="10" (keyup)="onInputChange($event)"
-        [(ngModel)]="copyDate" (blur)="validateFieldRecapture(field)">
+        [(ngModel)]="copyDate" (blur)="this.fieldService.validateFieldRecapture(field, form)">
       </div> 
     `
 })
@@ -21,16 +22,7 @@ export class DateTextBoxComponent {
 
     copyDate:any;
     
-    constructor() {
-    }
-
-    validateFieldRecapture(field){        
-        let origin = this.form.controls[field.validateField].value;
-        let compare = this.form.controls[field.name].value;
-
-        if(field.recapture && (origin !== compare)){    
-            this.form.controls[field.name].setErrors({'noMatch': true});
-        }
+    constructor(private fieldService: FieldsFunctionalityService) {
     }
 
     onInputChange(event:any) {

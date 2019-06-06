@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { Validators } from "@angular/forms";
+import { DocumentFieldsService } from './document-fields.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'my-app',
@@ -11,7 +13,8 @@ export class AppComponent {
 
   public form: FormGroup;
   unsubcribe: any;
-
+  fields;
+ 
    dynamicsFields = [
      {
       type: 'datetext',
@@ -98,9 +101,17 @@ export class AppComponent {
     }
   ];
 
-  public fields: any[] = this.dynamicsFields;
+   //public fields: any = this.dynamicsFields;
 
-  constructor() {
+  constructor(private rest: DocumentFieldsService) {
+    this.fields = this.dynamicsFields;
+    console.log(this.fields);
+    this.rest.getDocuments().subscribe((data: {}) => {
+      console.log(data);
+      this.fields = data;
+
+    });
+    
     this.form = new FormGroup({
       fields: new FormControl(JSON.stringify(this.fields))
     })
@@ -110,6 +121,15 @@ export class AppComponent {
     });
 
   }
+
+  // getDocuments(){
+  //   this.rest.getDocuments().subscribe((data: {}) => {
+  //     console.log(data);
+  //     console.log(this.fields);
+  //     this.fields = data;
+  //     console.log(this.fields);
+  //   });
+  // }
 
   onUpload(e) {
     console.log(e);
