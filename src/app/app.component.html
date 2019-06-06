@@ -2,8 +2,8 @@
 <div class="col-sm-12">
   <div class="card">
     <div class="card-header">Dynamic Forms</div>
-    <div class="card-body">
-      <dynamic-form-builder [fields]="getFields()"></dynamic-form-builder>
+    <div class="card-body" *ngIf="fields">
+      <dynamic-form-builder [fields]="fields"></dynamic-form-builder>
     </div>
   </div>
 </div>

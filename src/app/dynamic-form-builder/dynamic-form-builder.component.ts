@@ -21,11 +21,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class DynamicFormBuilderComponent implements OnInit {
   @Output() onSubmit = new EventEmitter();
-  @Input() fields: any[] = [];
+  @Input() fields: any[];
   form: FormGroup;
   constructor() { }
 
   ngOnInit() {
+    console.log(this.fields.length);
     let fieldsCtrls = {};
     for (let f of this.fields) {
       if (f.type != 'checkbox') {

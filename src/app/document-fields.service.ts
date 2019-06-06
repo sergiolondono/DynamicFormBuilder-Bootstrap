@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
 
 @Injectable()
 
@@ -22,10 +21,10 @@ export class DocumentFieldsService {
     return body || { };
   }
 
-  getDocuments(): Observable<any> {
+  getDocuments(): Observable<any[]> {
     // return this.http.get(this.endpoint).pipe(
     //   map(this.extractData));
-    return this.http.get(this.endpoint);
+    return this.http.get<any[]>(this.endpoint);
   }
 
 }

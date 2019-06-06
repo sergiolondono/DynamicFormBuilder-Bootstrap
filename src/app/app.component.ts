@@ -1,19 +1,18 @@
-import { Component, Input } from '@angular/core';
-import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from "@angular/forms";
 import { DocumentFieldsService } from './document-fields.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   public form: FormGroup;
   unsubcribe: any;
-  fields;
+  public fields: any[];
  
    dynamicsFields = [
      {
@@ -101,42 +100,33 @@ export class AppComponent {
     }
   ];
 
-   //public fields: any = this.dynamicsFields;
+    //public fields: any = this.dynamicsFields;
 
   constructor(private rest: DocumentFieldsService) {
-    this.fields = this.dynamicsFields;
-    console.log(this.fields);
-    this.rest.getDocuments().subscribe((data: {}) => {
-      console.log(data);
-      this.fields = data;
-
-    });
     
+    this.rest.getDocuments().subscribe((data: []) => {  
+      this.fields = data;
+      console.log(this.fields);
+    });
+
     this.form = new FormGroup({
       fields: new FormControl(JSON.stringify(this.fields))
     })
-    this.unsubcribe = this.form.valueChanges.subscribe((update) => {
-      console.log(update);
+    this.unsubcribe = this.form.valueChanges.subscribe((update) => {    
       this.fields = JSON.parse(update.fields);
     });
 
   }
 
-  // getDocuments(){
-  //   this.rest.getDocuments().subscribe((data: {}) => {
-  //     console.log(data);
-  //     console.log(this.fields);
-  //     this.fields = data;
-  //     console.log(this.fields);
-  //   });
-  // }
+  ngOnInit() {
+  }
 
   onUpload(e) {
     console.log(e);
-
   }
 
   getFields() {
+    console.log("getFields");
     return this.fields;
   }
 
