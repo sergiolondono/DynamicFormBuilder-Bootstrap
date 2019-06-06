@@ -25,13 +25,39 @@ export class DynamicFormBuilderComponent implements OnInit {
   form: FormGroup;
   constructor() { }
 
+  returnValidations(field){
+    field.validators = [];
+    if(field.required)
+     {
+        if(field.hasPattern)
+          field.validators = [Validators.required, Validators.pattern(field.pattern)]
+        else
+          field.validators = [Validators.required]        
+     }  
+    return field.validators;
+  }
+
   ngOnInit() {
     console.log(this.fields.length);
     let fieldsCtrls = {};
+    // for (let f of this.fields) {
+    //   if (f.type != 'checkbox') {
+    //     fieldsCtrls[f.name] = new FormControl(f.value || '', 
+    //     Validators.compose(f.validators))
+    //     //Validators.required)
+    //   } else {
+    //     let opts = {};
+    //     for (let opt of f.options) {
+    //       opts[opt.key] = new FormControl(opt.value);
+    //     }
+    //     fieldsCtrls[f.name] = new FormGroup(opts)
+    //   }
+    // }
+
     for (let f of this.fields) {
-      if (f.type != 'checkbox') {
+      if (f.type != 'checkbox') {   
         fieldsCtrls[f.name] = new FormControl(f.value || '', 
-        Validators.compose(f.validators))
+        Validators.compose(this.returnValidations(f)))
         //Validators.required)
       } else {
         let opts = {};
@@ -41,6 +67,8 @@ export class DynamicFormBuilderComponent implements OnInit {
         fieldsCtrls[f.name] = new FormGroup(opts)
       }
     }
+
     this.form = new FormGroup(fieldsCtrls);
   }
+
 }

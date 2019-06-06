@@ -7,8 +7,7 @@ import { FormGroup } from '@angular/forms';
     template: `
       <div [formGroup]="form">
         <input *ngIf="!field.multiline" [attr.type]="field.type" class="form-control"  
-        [id]="field.name" [name]="field.name" [formControlName]="field.name"
-        maxlength="10">
+        [id]="field.name" [name]="field.name" [formControlName]="field.name" maxlength="100">
         <textarea *ngIf="field.multiline" [class.is-invalid]="isDirty && !isValid" 
         [formControlName]="field.name" [id]="field.name"
         rows="9" class="form-control" [placeholder]="field.placeholder"></textarea>

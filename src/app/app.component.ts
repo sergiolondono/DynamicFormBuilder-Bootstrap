@@ -12,8 +12,8 @@ export class AppComponent implements OnInit {
 
   public form: FormGroup;
   unsubcribe: any;
-  public fields: any[];
- 
+  //public fields: any[];
+
    dynamicsFields = [
      {
       type: 'datetext',
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
       label: 'Date',
       value: '',
       required: true,
-      validators: [Validators.required]
+      validations: 'required'
      },
      {
       type: 'datetext',
@@ -30,32 +30,29 @@ export class AppComponent implements OnInit {
       value: '',
       required: true,
       recapture: true,
-      validateField: 'date',
-      validators: [Validators.required]
+      validateField: 'date'
      },
     {
       type: 'text',
       name: 'firstName',
       label: 'First Name',
       value: '',
-      required: true,
-      validators: [Validators.required]
+      required: true
     },
     {
       type: 'text',
       name: 'lastName',
       label: 'Last Name',
       value: '',
-      required: true,
-      validators: [Validators.required]
+      required: false
     },
     {
       type: 'text',
       name: 'email',
       label: 'Email',
       required: true,
-      validators: [Validators.required, Validators.pattern(
-            "^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$")],
+      hasPattern: true,
+      pattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
       value: ''
     },
 
@@ -100,14 +97,14 @@ export class AppComponent implements OnInit {
     }
   ];
 
-    //public fields: any = this.dynamicsFields;
+    public fields: any = this.dynamicsFields;
 
   constructor(private rest: DocumentFieldsService) {
     
-    this.rest.getDocuments().subscribe((data: []) => {  
-      this.fields = data;
-      console.log(this.fields);
-    });
+    // this.rest.getDocuments().subscribe((data: []) => {  
+    //   this.fields = data;
+    //   console.log(this.fields);
+    // });
 
     this.form = new FormGroup({
       fields: new FormControl(JSON.stringify(this.fields))
