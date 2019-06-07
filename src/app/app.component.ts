@@ -14,14 +14,13 @@ export class AppComponent implements OnInit {
   unsubcribe: any;
   //public fields: any[];
 
-   dynamicsFields = [
+   dynamicsFields2 = [
      {
       type: 'datetext',
       name: 'date',
       label: 'Date',
       value: '',
-      required: true,
-      validations: 'required'
+      required: true
      },
      {
       type: 'datetext',
@@ -97,7 +96,197 @@ export class AppComponent implements OnInit {
     }
   ];
 
-    public fields: any = this.dynamicsFields;
+  dynamicsFields = [
+    {
+        "idKw": 320,
+        "idTemplate": 1188,
+        "tipoDato": "Fecha corta",
+        "type": "datetext",
+        "name": "xFechaExpedicion",
+        "label": "xFechaExpedicion",
+        "value": "",
+        "required": true,
+        "idDiccionario": 0,
+        "doblecaptura": false,
+        "recapture": false,
+        "validateField": "",
+        "options": null,
+        "longitudMin": 1,
+        "longitudMax": 10,
+        "formatoFecha": "MM/dd/yyyy",
+        "regExp": null,
+        "guardarDefault": null,
+        "valorDefault": null
+    },
+    {
+        "idKw": 321,
+        "idTemplate": 1188,
+        "tipoDato": "Alfanumerico",
+        "type": "dropdown",
+        "name": "xTipoDocumentoIdentificacion",
+        "label": "xTipoDocumentoIdentificacion",
+        "value": "",
+        "required": true,
+        "idDiccionario": 57,
+        "doblecaptura": true,
+        "recapture": false,
+        "validateField": "",
+        "options": [
+            {
+                "key": "Carne Diplomatico",
+                "label": "Diplomatico"
+            },
+            {
+                "key": "Cedula de Ciudadania",
+                "label": "Cedula de Ciudadania"
+            },
+            {
+                "key": "Cedula de Extranjeria",
+                "label": "Cedula de Extranjeria"
+            },
+            {
+                "key": "NIT",
+                "label": "NIT"
+            },
+            {
+                "key": "Tarjeta de Identidad",
+                "label": "Tarjeta de Identidad"
+            },
+            {
+                "key": "Pasaporte",
+                "label": "Pasaporte"
+            },
+            {
+                "key": "ID extranjero PN no residente en Colombia",
+                "label": "ID extranjero PN no residente en Colombia"
+            },
+            {
+                "key": "Fideicomiso",
+                "label": "Fideicomiso"
+            },
+            {
+                "key": "Registro Civil",
+                "label": "Registro Civil"
+            },
+            {
+                "key": "ID extranjero PJ no residente en Colombia",
+                "label": "ID extranjero PJ no residente en Colombia"
+            }
+        ],
+        "longitudMin": 1,
+        "longitudMax": 255,
+        "formatoFecha": null,
+        "regExp": null,
+        "guardarDefault": null,
+        "valorDefault": null
+    },
+    {
+        "idKw": 321,
+        "idTemplate": 1188,
+        "tipoDato": "Alfanumerico",
+        "type": "dropdown",
+        "name": "xTipoDocumentoIdentificacionrecaptura",
+        "label": "xTipoDocumentoIdentificacionrecaptura",
+        "value": "",
+        "required": true,
+        "idDiccionario": 57,
+        "doblecaptura": true,
+        "recapture": true,
+        "validateField": "xTipoDocumentoIdentificacion",
+        "options": [
+            {
+                "key": "Carne Diplomatico",
+                "label": "Diplomatico"
+            },
+            {
+                "key": "Cedula de Ciudadania",
+                "label": "Cedula de Ciudadania"
+            },
+            {
+                "key": "Cedula de Extranjeria",
+                "label": "Cedula de Extranjeria"
+            },
+            {
+                "key": "NIT",
+                "label": "NIT"
+            },
+            {
+                "key": "Tarjeta de Identidad",
+                "label": "Tarjeta de Identidad"
+            },
+            {
+                "key": "Pasaporte",
+                "label": "Pasaporte"
+            },
+            {
+                "key": "ID extranjero PN no residente en Colombia",
+                "label": "ID extranjero PN no residente en Colombia"
+            },
+            {
+                "key": "Fideicomiso",
+                "label": "Fideicomiso"
+            },
+            {
+                "key": "Registro Civil",
+                "label": "Registro Civil"
+            },
+            {
+                "key": "ID extranjero PJ no residente en Colombia",
+                "label": "ID extranjero PJ no residente en Colombia"
+            }
+        ],
+        "longitudMin": 1,
+        "longitudMax": 255,
+        "formatoFecha": null,
+        "regExp": null,
+        "guardarDefault": null,
+        "valorDefault": null
+    },
+    {
+        "idKw": 322,
+        "idTemplate": 1188,
+        "tipoDato": "Alfanumerico",
+        "type": "text",
+        "name": "xNumeroIdentificacion",
+        "label": "xNumeroIdentificacion",
+        "value": "",
+        "required": true,
+        "idDiccionario": 0,
+        "doblecaptura": true,
+        "recapture": false,
+        "validateField": "",
+        "options": null,
+        "longitudMin": 1,
+        "longitudMax": 255,
+        "formatoFecha": null,
+        "regExp": null,
+        "guardarDefault": null,
+        "valorDefault": null
+    },
+    {
+        "idKw": 322,
+        "idTemplate": 1188,
+        "tipoDato": "Alfanumerico",
+        "type": "text",
+        "name": "xNumeroIdentificacionrecaptura",
+        "label": "xNumeroIdentificacionrecaptura",
+        "value": "",
+        "required": true,
+        "idDiccionario": 0,
+        "doblecaptura": true,
+        "recapture": true,
+        "validateField": "xNumeroIdentificacion",
+        "options": null,
+        "longitudMin": 1,
+        "longitudMax": 255,
+        "formatoFecha": null,
+        "regExp": null,
+        "guardarDefault": null,
+        "valorDefault": null
+    }
+];
+   
+public fields: any = this.dynamicsFields;
 
   constructor(private rest: DocumentFieldsService) {
     

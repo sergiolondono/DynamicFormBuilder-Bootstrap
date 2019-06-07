@@ -9,8 +9,8 @@ import { FieldsFunctionalityService } from 'src/app/fields-functionality.service
       <div [formGroup]="form">
         <input *ngIf="!field.multiline" [attr.type]="field.type" class="form-control"  
         [id]="field.name" [name]="field.name" [formControlName]="field.name" 
-        maxlength="10" (keyup)="onInputChange($event)"
-        [(ngModel)]="copyDate" (blur)="this.fieldService.validateFieldRecapture(field, form)">
+        maxlength="10" (keyup)="onInputChange($event)" (keydown)="this.fieldService.validateFieldRecapture(field, form)" 
+        [(ngModel)]="copyDate">
       </div> 
     `
 })
